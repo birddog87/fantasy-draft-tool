@@ -25,7 +25,7 @@ const App: React.FC = () => {
     document.title = "Hammer's Fantasy Draft Lottery";
     const link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
     if (link) {
-      link.href = '/images/favicon.ico';
+      link.href = `${process.env.PUBLIC_URL}/images/favicon.ico`;
     }
     return () => {
       audio.pause();
@@ -38,17 +38,22 @@ const App: React.FC = () => {
       interval = setInterval(() => {
         setCurrentReveal(prev => prev + 1);
       }, 10000);
-    } else if (currentReveal === draftOrder.length - 1) {
-      setIsDraftComplete(true);
-      setIsPlaying(false);
-      audio.pause();
-      confetti({
-        particleCount: 300,
-        spread: 180,
-        origin: { y: 0.6 }
-      });
+    } else if (isPlaying && currentReveal === draftOrder.length - 1) {
+      setTimeout(() => {
+        setIsDraftComplete(true);
+        setIsPlaying(false);
+        audio.pause();
+        confetti({
+          particleCount: 300,
+          spread: 180,
+          origin: { y: 0.6 }
+        });
+      }, 10000);
     }
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(interval);
+    };
   }, [isPlaying, currentReveal, draftOrder.length, audio]);
 
   const addTeam = () => {
@@ -95,6 +100,13 @@ const App: React.FC = () => {
     setIsPlaying(false);
     audio.pause();
     audio.currentTime = 0;
+  };
+
+  const getBackgroundColor = (index: number, totalTeams: number) => {
+    if (index === 0) return 'linear-gradient(45deg, #FFD700, #FFA500)'; // Gold for 1st
+    if (index === 1) return 'linear-gradient(45deg, #C0C0C0, #E0E0E0)'; // Silver for 2nd
+    if (index === 2) return 'linear-gradient(45deg, #CD7F32, #DFA67B)'; // Bronze for 3rd
+    return 'rgba(255,255,255,0.2)'; // Default background
   };
 
   return (
@@ -211,15 +223,15 @@ const App: React.FC = () => {
                   exit={{ opacity: 0, y: 50 }}
                   transition={{ duration: 0.5 }}
                   style={{ 
-                    background: index === currentReveal ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'rgba(255,255,255,0.2)', 
+                    background: getBackgroundColor(currentReveal - index, draftOrder.length),
                     padding: '1.5rem', 
                     borderRadius: '8px',
                     textAlign: 'center'
                   }}
                 >
-                  <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Pick #{draftOrder.length - index}</p>
+                  <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Pick #{draftOrder.length - (currentReveal - index)}</p>
                   <p style={{ fontSize: '2rem' }}>{team}</p>
-                  {index === currentReveal && index === draftOrder.length - 1 && (
+                  {index === 0 && currentReveal === draftOrder.length - 1 && (
                     <p style={{ fontSize: '1.2rem', marginTop: '0.5rem' }}>🏆 First Overall Pick! 🏆</p>
                   )}
                 </motion.div>

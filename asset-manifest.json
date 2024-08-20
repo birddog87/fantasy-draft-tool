@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/fantasy-draft-tool/static/css/main.a4084e28.css",
-    "main.js": "/fantasy-draft-tool/static/js/main.10b992ab.js",
+    "main.js": "/fantasy-draft-tool/static/js/main.c2fb5a82.js",
     "static/js/453.e87a2555.chunk.js": "/fantasy-draft-tool/static/js/453.e87a2555.chunk.js",
     "static/media/eagles.png": "/fantasy-draft-tool/static/media/eagles.6b46421fab41a79a33b8.png",
     "index.html": "/fantasy-draft-tool/index.html",
     "main.a4084e28.css.map": "/fantasy-draft-tool/static/css/main.a4084e28.css.map",
-    "main.10b992ab.js.map": "/fantasy-draft-tool/static/js/main.10b992ab.js.map",
+    "main.c2fb5a82.js.map": "/fantasy-draft-tool/static/js/main.c2fb5a82.js.map",
     "453.e87a2555.chunk.js.map": "/fantasy-draft-tool/static/js/453.e87a2555.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a4084e28.css",
-    "static/js/main.10b992ab.js"
+    "static/js/main.c2fb5a82.js"
   ]
 }

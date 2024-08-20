@@ -1,5 +1,6 @@
 {
   "name": "better-fantasy-football-generator",
+  "homepage": "https://birddog87.github.io/fantasy-draft-tool",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +52,7 @@
   "devDependencies": {
     "@types/canvas-confetti": "^1.6.4",
     "fireworks-js": "^2.10.8",
+    "gh-pages": "^6.1.1",
     "install": "^0.13.0",
     "npm": "^10.8.2"
   }

@@ -76,7 +76,7 @@ const App: React.FC = () => {
       [ballots[i], ballots[j]] = [ballots[j], ballots[i]];
     }
     
-    return Array.from(new Set(ballots)).reverse();
+    return Array.from(new Set(ballots));
   };
 
   const startDraft = () => {
@@ -211,7 +211,7 @@ const App: React.FC = () => {
                   exit={{ opacity: 0, y: 50 }}
                   transition={{ duration: 0.5 }}
                   style={{ 
-                    background: index === 0 ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'rgba(255,255,255,0.2)', 
+                    background: index === currentReveal ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'rgba(255,255,255,0.2)', 
                     padding: '1.5rem', 
                     borderRadius: '8px',
                     textAlign: 'center'
@@ -219,7 +219,7 @@ const App: React.FC = () => {
                 >
                   <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Pick #{draftOrder.length - index}</p>
                   <p style={{ fontSize: '2rem' }}>{team}</p>
-                  {index === 0 && currentReveal === draftOrder.length - 1 && (
+                  {index === currentReveal && index === draftOrder.length - 1 && (
                     <p style={{ fontSize: '1.2rem', marginTop: '0.5rem' }}>🏆 First Overall Pick! 🏆</p>
                   )}
                 </motion.div>
